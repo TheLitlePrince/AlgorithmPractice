@@ -1,6 +1,8 @@
 #ifndef maxheap_h
 #define maxheap_h
 
+#include <iostream>
+
 class maxheap
 {
   public:
@@ -19,11 +21,12 @@ class maxheap
     void insert(int x);
     void erase(int x);
     int pop();
+    void display();
 
   private:
     void siftUp(int i);
     void siftDown(int i);
-    void swap(int *x, int *y);
+    void swap(int &x, int &y);
     int search(int x);
     void reserve();
     int *p;
@@ -32,6 +35,13 @@ class maxheap
 };
 
 #endif
+
+void maxheap::display()
+{
+    for (int i = 0; i < size; ++i)
+        std::cout << p[i] << '\t';
+    std::cout << '\n';
+}
 
 void maxheap::heapSort()
 {
@@ -137,9 +147,9 @@ void maxheap::reserve()
     p = np;
 }
 
-void maxheap::swap(int *x, int *y)
+void maxheap::swap(int &x, int &y)
 {
-    *x = *x ^ *y;
-    *y = *x ^ *y;
-    *x = *x ^ *y;
+    x = x ^ y;
+    y = x ^ y;
+    x = x ^ y;
 }
