@@ -1,47 +1,48 @@
-#include <iostream>
-#include <vector>
-using namespace std;
+void bottomupsort(int arr[], int n);
 
-void merge(vector<int> &v, int p, int q, int r)
+void merge(int arr[], int p, int q, int r)
 {
-    int x = p, y = q, pos = p;
-    vector<int> swap = v;
+    int x = p, y = q;
+    int *deposit = new int[r - p];
+
+    int i = 0;
     while (x < q && y < r)
     {
-        if (v[x] < v[y])
-            swap[pos++] = v[x++];
+        if (arr[x] < arr[y])
+            deposit[i++] = arr[x++];
         else
-            swap[pos++] = v[y++];
+            deposit[i++] = arr[y++];
     }
-    if (y == r)
-        for (; x < q; ++x)
-            swap[pos++] = v[x];
-    v = swap;
+    if (x == p)
+    {
+        for (; y < r;)
+            deposit[i++] = arr[y++];
+    }
+    else
+    {
+        for (; x < q;)
+            deposit[i++] = arr[x++];
+    }
+
+    i = 0;
+    for (; i < r - p;)
+        arr[p++] = deposit[i++];
 }
 
-void bottomupsort(vector<int> &v)
+void bottomupsort(int arr[], int n)
 {
-    int cur = 1, next = 2, sum = v.size();
-    while (cur < sum)
+    int cur = 1, next = 2;
+    while (cur < n)
     {
         int num = 0;
-        while (num + next <= sum)
+        while (num + next <= n)
         {
-            merge(v, num, num + cur, num + next);
+            merge(arr, num, num + cur, num + next);
             num += next;
         }
-        if (num + cur < sum)
-            merge(v, num, num + cur, sum);
+        if (num + cur < n)
+            merge(arr, num, num + cur, n);
         cur = next;
         next = 2 * cur;
     }
-}
-
-int main()
-{
-    vector<int> v = {1, 5, 2, 6, 2, 7, 8, 4, 6, 2, 23, -23, 54};
-    bottomupsort(v);
-    for (int x : v)
-        cout << x << endl;
-    system("pause");
 }
