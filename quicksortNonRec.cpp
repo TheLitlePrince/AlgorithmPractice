@@ -25,10 +25,6 @@ int split(int p[], int low, int high)
     int standard = p[low++];
     while (true)
     {
-        // if (low > high)
-        // {
-        //     return low - 1;
-        // }
         if (p[high] > standard)
         {
             --high;
