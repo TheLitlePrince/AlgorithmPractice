@@ -23,7 +23,7 @@ int searchMost(int p[], int n)
         return 0;
 
     int cand = candidate(p, n, 0), count = 0;
-    cout << cand << endl;
+
     for (int i = 0; i < n; ++i)
     {
         if (p[i] == cand)
