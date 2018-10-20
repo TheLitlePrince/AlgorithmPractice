@@ -51,19 +51,13 @@ void radixsort(Point p[], int n)
             index = p[index].next;
         }
 
-        int next;
         index = 0;
         for (int i = 0; i < base; ++i)
         {
-            while ((next = bottomBucket[i]) != 0)
+            if (bottomBucket[i] != 0)
             {
-                p[index].next = next;
-                index = next;
-
-                if (index == upBucket[i])
-                    bottomBucket[i] = 0;
-                else
-                    bottomBucket[i] = p[next].next;
+                p[index].next = bottomBucket[i];
+                index = upBucket[i];
             }
 
             p[index].next = 0;
