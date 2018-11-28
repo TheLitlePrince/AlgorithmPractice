@@ -21,8 +21,6 @@ int main()
     while (q == p)
         q = pri_generate(digits);
 
-    cout << p << '\t' << q << endl;
-
     prime_t N = p * q, M = (p - 1) * (q - 1);
 
     prime_t e = get_randE(M);
@@ -30,8 +28,6 @@ int main()
         e = get_randE(M);
 
     prime_t d = get_inverse(M, e);
-
-    cout << d << endl;
 
     cout << "Hello, Alice! RSA keys generation finished." << endl;
     cout << "N:\t" << N << endl;
